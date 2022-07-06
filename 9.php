@@ -1,4 +1,5 @@
 <?php
+//DONE
 //Add the following method:
 //function show_user_name_and_balance() { }
 //Your method should return a string that contains the account's name and balance separated by a comma and space.
@@ -20,7 +21,7 @@ class BankAccount
         $this->balance = $balance;
     }
 
-    public function showUserNameAndBalance()
+    public function showUserNameAndBalance(): string
     {
         if ($this->balance < 0) {
             return "$this->name, -$" . number_format($this->balance * (-1), 2);

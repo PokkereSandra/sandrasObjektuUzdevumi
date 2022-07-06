@@ -1,4 +1,5 @@
 <?php
+//DONE
 //The questions in this exercise all deal with a class Dog that you have to program from scratch.
 //Create a class Dog. Dogs should have a name, and a sex.
 //Make a class DogTest with a Main method in which you create the following Dogs:
@@ -25,19 +26,42 @@
 //referenceToCoco.HasSameMotherAs(referenceToRocky). Show that the new method works in the DogTest main method.
 class Dog
 {
-    public string $name;
-    public string $sex;
+    private string $name;
+    private string $sex;
+    private ?Dog $mother;
+    private ?Dog $father;
 
-}
-
-class DogTest
-{
-    public string $name;
-    public string $sex;
-
-    public function createADog($name, $sex)
+    public function __construct(string $name, string $sex, Dog $mother = null, Dog $father = null)
     {
         $this->name = $name;
         $this->sex = $sex;
+        $this->mother = $mother;
+        $this->father = $father;
+    }
+
+    public function fathersName(): string
+    {
+        if (!$this->father) return "Unknown";
+        return $this->father->name;
+    }
+
+    public function hasSameMotherAs(Dog $otherDog): bool
+    {
+        return $this->mother === $otherDog->mother;
     }
 }
+
+$dogs = [
+    $sparky = new Dog("Sparky", "male"),
+    $sam = new Dog("Sam", "male"),
+    $lady = new Dog("Lady", "female"),
+    $molly = new Dog("Molly", "female"),
+    $rocky = new Dog("Rocky", "male", $molly, $sam),
+    $max = new Dog("Max", "male", $lady, $rocky),
+    $buster = new Dog("Buster", "male", $lady, $sparky),
+    $coco = new Dog("Coco", "female", $molly, $buster)
+];
+echo $coco->fathersName() . PHP_EOL;
+echo $sparky->fathersName() . PHP_EOL;
+var_dump($coco->hasSameMotherAs($rocky));
+var_dump($buster->hasSameMotherAs($rocky));

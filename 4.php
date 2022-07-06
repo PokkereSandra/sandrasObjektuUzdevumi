@@ -1,4 +1,5 @@
 <?php
+//DONE
 //The class Movie is started below. An instance of class Movie represents a film. This class has
 // the following three class variables:
 //title, which is a string representing the title of the movie

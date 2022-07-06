@@ -1,4 +1,5 @@
 <?php
+//DONE
 //Design a SavingsAccount class that stores a savings account’s annual interest rate and balance.
 //The class constructor should accept the amount of the savings account’s starting balance.
 //The class should also have methods for:subtracting the amount of a withdrawal
@@ -25,7 +26,7 @@ class SavingsAccount
         $this->balance = $startingBalance;
     }
 
-    public function setAnnualInterestRate($interestRate)
+    public function setAnnualInterestRate(float $interestRate):void
     {
         $this->annualInterestRate = $interestRate;
     }

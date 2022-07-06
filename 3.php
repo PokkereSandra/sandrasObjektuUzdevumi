@@ -1,4 +1,5 @@
 <?php
+//DONE
 //For this exercise, you will design a set of classes that work together to simulate a car's fuel gauge and odometer.
 // The classes you will design are the following:
 //The FuelGauge Class: This class will simulate a fuel gauge. Its responsibilities are as follows:
@@ -27,26 +28,29 @@ class FuelGauge
         $this->currentAmountOfFuel = $currentAmountOfFuel;
     }
 
-    public function getFuel(int $amount): int
+    public function getCurrentAmountOfFuel(): int
+    {
+        return $this->currentAmountOfFuel;
+    }
+
+    public function setAmountOfFuel(int $amount): void
+
     {
         if ($this->currentAmountOfFuel + $amount > 70) {
-            return 70;
+            $this->currentAmountOfFuel = 70;
         }
-        return $this->currentAmountOfFuel + $amount;
+        $this->currentAmountOfFuel = $this->currentAmountOfFuel + $amount;
     }
 
-    public function burnFuel(int $currentAmountOfFuel): int
+    public function burnFuel(): void
     {
         if ($this->currentAmountOfFuel > 0) {
-            return $currentAmountOfFuel - 1;
+            $this->currentAmountOfFuel = $this->currentAmountOfFuel - 1;
+        } else {
+            $this->currentAmountOfFuel = 0;
         }
-        return 0;
     }
 
-    public function economyRun(int $amount): int
-    {
-
-    }
 }
 
 class Odometer
@@ -58,15 +62,39 @@ class Odometer
         $this->currentMileage = $currentMileage;
     }
 
-    public function increaseOfMileage(int $currentMileage): int
+    public function getCurrentMileage(): int
+    {
+        return $this->currentMileage;
+    }
+
+    public function increaseOfMileage(): void
     {
         if ($this->currentMileage + 1 <= 999999) {
-            return $this->currentMileage + 1;
+            $this->currentMileage = $this->currentMileage + 1;
+        } else {
+            $this->currentMileage = 0;
         }
-        return 0;
     }
 }
 
-$car = new FuelGauge(30);
-echo $car->getFuel(50);
-echo $car->burnFuel(70);
+$carGauge = new FuelGauge(3);
+$carOdometer = new Odometer(999999);
+$odometerAtStart = $carOdometer->getCurrentMileage();
+
+while ($carGauge->getCurrentAmountOfFuel() >= 0) {
+    echo "Fuel: " . $carGauge->getCurrentAmountOfFuel() . " liters" . PHP_EOL;
+    echo "Odometer: " . $carOdometer->getCurrentMileage() . " km" . PHP_EOL;
+    $carOdometer->increaseOfMileage();
+    if (($carOdometer->getCurrentMileage() - $odometerAtStart) % 10 === 0) {
+        $carGauge->burnFuel();
+    }
+    if ($carGauge->getCurrentAmountOfFuel() == 0) {
+        $putFuel = readline("Would You like to put fuel in Your car? y/n ");
+        if ($putFuel == "y") {
+            $carGauge->setAmountOfFuel((int)readline("Add fuel(liters): "));
+        } else {
+            exit();
+        }
+    }
+}
+

@@ -1,4 +1,5 @@
 <?php
+//DONE
 //Create a class called Date that includes: three pieces of information as instance variables — a month,
 // a day and a year.
 //Your class should have a constructor that initializes the three instance variables and assumes that
@@ -22,38 +23,59 @@ class Date
         $this->year = $year;
     }
 
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
 
-    public function getDay()
+    public function getDay(): int
     {
         return $this->day;
     }
 
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
 
-    public function setMonth($newMonth)
+    public function setMonth(int $newMonth): void
     {
-        if ($newMonth > 12 || $newMonth < 1) {
-            return "invalid value";
-        }
-        return $this->month = $newMonth;
+        $this->month = $newMonth;
     }
-    public function setDay($newDay)
+
+    public function setDay(int $newDay): void
     {
-        if ($newDay > 31 || $newDay < 1) {
-            return "invalid value";
+        $this->day = $newDay;
+    }
+
+    public function setYear(int $newYear): void
+    {
+        $this->year = $newYear;
+    }
+
+    public function displayDate(int $month, int $day, int $year): string
+    {
+        if ($day > 31 || $day < 1) {
+            return "invalid value of day" . PHP_EOL;
         }
-        return $this->day = $newDay;
+        else if ($month > 12 || $month < 1) {
+            return "invalid value of month";
+        }
+        return "{$this->getMonth()}/{$this->getDay()}/{$this->getYear()}";
     }
 }
 
+$date = new Date(11, 12, 1978);
+$month = (int)readline("enter month: ");
+$day = (int)readline("enter day: ");
+$year = (int)readline("enter year: ");
+function dateTest(int $month, int $day, int $year): string
+{
+    $newDate = new Date($month, $day, $year);
+    $newDate->setMonth($month);
+    $newDate->setDay($day);
+    $newDate->setYear($year);
+    return $newDate->displayDate($month, $day, $year);
+}
 
-$date = new Date(14, 12, 1978);
-//$date->setMonth(14);
-var_dump($date);
+echo dateTest($month, $day, $year);

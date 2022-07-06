@@ -1,4 +1,5 @@
 <?php
+//DONE
 //The object of the class Account represents a bank account that has a balance (meaning some amount of money).
 // The accounts are used as follows:
 //$bartos_account = new Account("Barto's account", 100.00);
@@ -94,23 +95,23 @@ function createAccount(string $name, int $balance): object
     return $person = new Account($name, $balance);
 }
 
-function deposit(object $person, int $deposit)
+function deposit(object $person, int $deposit): string
 {
     $person->deposit($deposit);
-    return $person->getName() . " account balance is: " . $person->balance() . PHP_EOL;
+    return $person->getName() . "'s account balance is: " . $person->balance() . PHP_EOL;
 }
 
 function transfer(object $personWhoTransfers, object $personWhoGetsTransfer, int $sum): string
 {
     $personWhoTransfers->withdrawal($sum);
     $personWhoGetsTransfer->deposit($sum);
-    return $personWhoTransfers->getName() . " account balance is: " . $personWhoTransfers->balance() . PHP_EOL .
-        $personWhoGetsTransfer->getName() . " account balance is: " . $personWhoGetsTransfer->balance() . PHP_EOL;
+    return $personWhoTransfers->getName() . "'s account balance is: " . $personWhoTransfers->balance() . PHP_EOL .
+        $personWhoGetsTransfer->getName() . "'s account balance is: " . $personWhoGetsTransfer->balance() . PHP_EOL;
 }
 
 $testAccount = createAccount("Sandra", 100.0);
 echo deposit($testAccount, 20);
-$matt = createAccount("Matt's account", 1000);
+$matt = createAccount("Matt account", 1000);
 $myAccount = createAccount("My account", 0);
 echo transfer($matt, $myAccount, 100);
 $a = new Account("A", 100);

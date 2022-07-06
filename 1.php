@@ -1,4 +1,5 @@
 <?php
+//DONE
 //Create a class Product that represents a product sold in a shop. A product has a price, amount and name.
 //The class should have:
 //A constructor Product(string name, float startPrice, int amount)
